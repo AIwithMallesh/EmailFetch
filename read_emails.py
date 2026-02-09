@@ -27,7 +27,7 @@ def get_all_emails(outlook, max_count=50):
     params = {
         "$top": "50",
         "$orderby": "receivedDateTime DESC",
-        "$select": "sender,subject,receivedDateTime,bodyPreview"
+        "$select": "sender,subject,receivedDateTime,bodyPreview,body,conversationId"
     }
 
     all_messages = []
@@ -84,7 +84,10 @@ if __name__ == "__main__":
     for i, email in enumerate(emails, 1):
         sender_name = email.get('sender', {}).get('emailAddress', {}).get('name', 'Unknown')
         subject = email.get('subject', '(No Subject)')
-        preview = email.get('bodyPreview', '').replace('\n', ' ')[:50] # First 50 chars
+        
+        # Get full body content
+        body_content = email.get('body', {}).get('content', 'No Content')
         
         print(f"{i}. [{sender_name}] {subject}")
-        print(f"   Excerpt: {preview}...\n")
+        print(f"   Message: {body_content}\n")
+        print("-" * 40 + "\n")

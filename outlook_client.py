@@ -44,7 +44,7 @@ class OutlookService:
                 f.write(self.cache.serialize())
             print("💾 Token cache saved.")
 
-    def get_token(self):
+    def get_token(self, interactive=True):
         # 1. Try to load from local cache (Silent Flow)
         accounts = self.app.get_accounts()
         if accounts:
@@ -121,6 +121,10 @@ class OutlookService:
                  raise Exception("Server stopped without capturing code.")
 
         except Exception as e:
+            if not interactive:
+                 print(f"❌ Automatic capture failed ({e}). Interactive mode disabled.")
+                 return None
+            
             print(f"❌ Automatic capture failed ({e}). Falling back to manual paste.")
             auth_response = input("Paste the FULL redirect URL (http://localhost:8000/?code=...) here: ").strip()
             if auth_response.startswith("localhost"):

@@ -42,7 +42,19 @@ AZURE_TENANT_ID=common
 
 ## Usage
 
-### Read Emails
+### Run App (Streamlit Interface)
+
+For a user-friendly web interface:
+
+```bash
+streamlit run main.py
+```
+
+-   **Connect Account**: Click the button in the sidebar to login.
+-   **View Emails**: See your inbox in a table or grouped by conversation (threaded view).
+-   **Refresh**: Click "Refresh Emails" to get the latest messages.
+
+### Read Emails (CLI)
 Run the email reader script:
 
 ```bash
