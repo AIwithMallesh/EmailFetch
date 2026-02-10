@@ -14,7 +14,7 @@ class GeminiValidator:
         genai.configure(api_key=api_key)
         # Using gemini-1.5-flash as stable default, can switch to 2.0-flash-exp if available
         # The user requested '2.5', we will try to use the latest available.
-        self.model = genai.GenerativeModel('gemini-1.5-flash') 
+        self.model = genai.GenerativeModel('gemini-2.5-flash') 
 
     def validate_and_extract(self, question, answer):
         """
